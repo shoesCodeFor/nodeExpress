@@ -1,0 +1,5 @@
+# This is a comment for .gitignore
+# We're going to ignore the following
+node_modules
+*~
+credentials.js
