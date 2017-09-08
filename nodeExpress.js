@@ -27,6 +27,9 @@ app.get('/', function(req, res){
 app.get('/about', function(req, res){
     res.render('about');
 });
+app.get('/file-upload', function(req, res){
+    res.render('file-upload');
+});
 
 app.listen(app.get('port'), function(){
     console.log('Express started on http://localhost:' + app.get('port') + ' Press CTRL-C to exit');
