@@ -3,7 +3,24 @@
         <div class="display-3">
             Contact Us
         </div>
-        <div class="lead">I love writing code.  Let me write some for you.</div>
+        <div class="lead">I love writing code.  I would love to write some for you.</div>
+        <form class="formContactUs" role="form"
+        action="/process?form=contactus" method="post">
+            <input type="hidden" name="_csrf" value="{{csrf}}">
+            <div class="form-group">
+                <label for="nameField" class="col-2">Your Name:</label>
+                <div class="col-4">
+                    <input type="text" class="form-control" id="nameField">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="emailField" class="col-2">Email:</label>
+                <div class="col-4">
+                    <input type="email" class="form-control" id="emailField">
+                </div>
+            </div>
+        </form>
+
 
     </div>
 
