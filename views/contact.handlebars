@@ -7,18 +7,32 @@
         <form class="formContactUs" role="form"
         action="/process?form=contactus" method="post">
             <input type="hidden" name="_csrf" value="{{csrf}}">
-            <div class="form-group">
-                <label for="nameField" class="col-2">Your Name:</label>
-                <div class="col-4">
-                    <input type="text" class="form-control" id="nameField">
+            <!-- User Name -->
+            <div class="form-group row">
+                <label for="nameField" class="col-sm-2 col-form-label">Your Name:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="nameField" name="contactName">
+                </div>
+            </div>
+            <!-- Email address fro the requestee -->
+            <div class="form-group row">
+                <label for="emailField" class="col-sm-2 col-form-label">Email Address:</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="emailField" name="emailAddy">
+                </div>
+            </div>
+            <!-- Nature of the request -->
+            <div class="form-group row">
+                <label for="descField" class="col-sm-6">A Brief Description of your project:</label>
+                <div class="col-12">
+                    <textarea class="form-control" id="descField" rows="4" name="description"></textarea>
                 </div>
             </div>
             <div class="form-group">
-                <label for="emailField" class="col-2">Email:</label>
-                <div class="col-4">
-                    <input type="email" class="form-control" id="emailField">
+                <div class="col-sm-4">
+                    <button type="submit" class="btn btn-primary btn-lg">Submit</button>
                 </div>
-            </div>
+            </div> <!-- End of form-group -->
         </form>
 
 

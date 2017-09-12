@@ -10,6 +10,12 @@ app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 
 // More Imports here
+app.use(require('body-parser').urlencoded({extended:true}));
+
+var formidable = require('formidable');
+
+var credentials = require('./credentials');
+app.use(require('cookie-parser')(credentials.cookieSecret));
 
 app.set('port', process.env.PORT || 3000);
 
@@ -28,10 +34,23 @@ app.get('/', function(req, res){
 // Route to about page
 app.get('/about', function(req, res){
     res.render('about');
+    console.log(req);
 });
 // Route to the contact page
 app.get('/contact', function(req, res){
-    res.render('contact');
+    res.render('contact', { csrf: 'CSRF Token Here' });
+});
+
+app.post('/process', function (req, res) {
+   console.log('Form Data: ' + req.query.form);
+   console.log('CSRF Token: ' + req.body._csrf );
+   console.log('Name: ' + req.body.contactName);
+   console.log('Email: ' + req.body.emailAddy);
+   console.log('Request Info: ' + req.body.description);
+   res.redirect(303, '/thankyou');
+});
+app.get('/thankyou', function (req, res){
+   res.render('thankyou');
 });
 // Route to a file upload
 app.get('/file-upload', function(req, res){
