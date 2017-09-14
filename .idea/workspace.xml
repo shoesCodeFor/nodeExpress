@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a3fd58f4-e233-4f68-9366-c51470115aae" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/views/file-error.handlebars" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nodeExpress.js" afterPath="$PROJECT_DIR$/nodeExpress.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/file-upload.handlebars" afterPath="$PROJECT_DIR$/views/file-upload.handlebars" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -22,8 +20,8 @@
       <file leaf-file-name="nodeExpress.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/nodeExpress.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="454">
-              <caret line="46" column="43" lean-forward="false" selection-start-line="46" selection-start-column="43" selection-end-line="46" selection-end-column="43" />
+            <state relative-caret-position="3531">
+              <caret line="107" column="100" lean-forward="false" selection-start-line="107" selection-start-column="100" selection-end-line="107" selection-end-column="100" />
               <folding />
             </state>
           </provider>
@@ -276,7 +274,7 @@
       <workItem from="1504682184419" duration="266000" />
       <workItem from="1504848607370" duration="5937000" />
       <workItem from="1504935113068" duration="1153000" />
-      <workItem from="1505103640369" duration="19096000" />
+      <workItem from="1505103640369" duration="19580000" />
     </task>
     <task id="LOCAL-00001" summary="13:30 Derek Banas Video">
       <created>1504682076781</created>
@@ -306,11 +304,18 @@
       <option name="project" value="LOCAL" />
       <updated>1505197663429</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Yum yum some cookies Still need to do sessions and we can wrap this one up.">
+      <created>1505370817305</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1505370817305</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29376000" />
+    <option name="totallyTimeSpent" value="29860000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="201" y="0" width="1959" height="1390" extended-state="0" />
@@ -348,7 +353,8 @@
     <MESSAGE value="Basic Routing: Home and About.  Getting ready for middleware 23:00.  Ignoring errors.  App is working." />
     <MESSAGE value="Added Middleware.  Form elements on contact page.  Need to complete form.&#10;28:00" />
     <MESSAGE value="Whooooa we're half way there....Whoa livin on a prayer.  35:20 Next: File Upload form with date markers" />
-    <option name="LAST_COMMIT_MESSAGE" value="Whooooa we're half way there....Whoa livin on a prayer.  35:20 Next: File Upload form with date markers" />
+    <MESSAGE value="Yum yum some cookies Still need to do sessions and we can wrap this one up." />
+    <option name="LAST_COMMIT_MESSAGE" value="Yum yum some cookies Still need to do sessions and we can wrap this one up." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -746,8 +752,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/nodeExpress.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="454">
-          <caret line="46" column="43" lean-forward="false" selection-start-line="46" selection-start-column="43" selection-end-line="46" selection-end-column="43" />
+        <state relative-caret-position="3531">
+          <caret line="107" column="100" lean-forward="false" selection-start-line="107" selection-start-column="100" selection-end-line="107" selection-end-column="100" />
           <folding />
         </state>
       </provider>

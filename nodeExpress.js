@@ -10,22 +10,20 @@ app.set('view engine', 'handlebars');
 
 // More Imports here
 app.use(require('body-parser').urlencoded({extended:true}));
-
 var formidable = require('formidable');
-
+// Some salt
 var credentials = require('./credentials');
 app.use(require('cookie-parser')(credentials.cookieSecret));
 // Let the port for the app
 app.set('port', process.env.PORT || 3000);
 // Load folders as static location
 app.use(express.static(__dirname + '/public'));
-/*
+/* Test get and app
 app.get('/', function (req, res){
     res.send('<h1>Express is Working!</h1>');
 });
-
-
 */
+
 // The default path.  ET phone home
 app.get('/', function(req, res){
     res.render('home');
@@ -36,22 +34,6 @@ app.get('/about', function(req, res){
     console.log(req);
 });
 
-// Set the cookie with expiration date
-app.get('/cookie', function (req, res) {
-
-    res.cookie('userName', 'Shoeberto', {expire: new Date() + 9999}).send('User Name is Shoeberto');
-
-});
-// Print all cookies to the console
-app.get('/listcookies',  function (req, res){
-    console.log('Cookies: ',  req.cookies);
-    res.send('Check the console for cookies');
-});
-// Clear all cookies
-app.get('/deletecookies', function (req, res){
-    res.clearCookie('userName');
-    res.send('userName Cookie Deleted');
-});
 
 // Route to the contact page
 app.get('/contact', function(req, res){
@@ -119,7 +101,22 @@ app.use(function (err, req, res, next) {
     console.error(err.stack);
     res.status(500);
     res.render('500');
-})
+});
+
+// Set the cookie with expiration date
+app.get('/cookie', function (req, res) {
+    res.cookie('userName', 'Shoeberto', {expire: new Date() + 9999}).send('User Name is Shoeberto');
+});
+// Print all cookies to the console
+app.get('/listcookies',  function (req, res){
+    console.log('Cookies: ',  req.cookies);
+    res.send('Check the console for cookies');
+});
+// Clear all cookies
+app.get('/deletecookies', function (req, res){
+    res.clearCookie('userName');
+    res.send('userName Cookie Deleted');
+});
 
 // A listener with console link to the site
 app.listen(app.get('port'), function(){
