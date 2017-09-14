@@ -1,11 +1,10 @@
+// Start a new Express app
 var express = require('express');
-
 var app = express();
-
+// Remove server header for security
 app.disable('x-powered-by');
-
+// Use Handlebars engine without
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
-
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 
@@ -16,9 +15,9 @@ var formidable = require('formidable');
 
 var credentials = require('./credentials');
 app.use(require('cookie-parser')(credentials.cookieSecret));
-
+// Let the port for the app
 app.set('port', process.env.PORT || 3000);
-
+// Load folders as static location
 app.use(express.static(__dirname + '/public'));
 /*
 app.get('/', function (req, res){
@@ -36,6 +35,24 @@ app.get('/about', function(req, res){
     res.render('about');
     console.log(req);
 });
+
+// Set the cookie with expiration date
+app.get('/cookie', function (req, res) {
+
+    res.cookie('userName', 'Shoeberto', {expire: new Date() + 9999}).send('User Name is Shoeberto');
+
+});
+// Print all cookies to the console
+app.get('/listcookies',  function (req, res){
+    console.log('Cookies: ',  req.cookies);
+    res.send('Check the console for cookies');
+});
+// Clear all cookies
+app.get('/deletecookies', function (req, res){
+    res.clearCookie('userName');
+    res.send('userName Cookie Deleted');
+});
+
 // Route to the contact page
 app.get('/contact', function(req, res){
     res.render('contact', { csrf: 'CSRF Token Here' });
@@ -54,9 +71,26 @@ app.get('/thankyou', function (req, res){
 });
 // Route to a file upload
 app.get('/file-upload', function(req, res){
-    res.render('file-upload');
+    var now = new Date();
+    console.log(now.getDate());
+    res.render('file-upload',{
+        year: now.getFullYear(),
+        month: now.getMonth()
+    });
 });
 
+app.post('/file-upload/:year/:month',
+    function (req, res){
+       var form = new formidable.IncomingForm;
+       form.parse(req, function(err, fields, file){
+            if(err)
+            {return res.redirect(303, 'file-error');}
+            console.log('Received File');
+            console.log(req.url);
+            console.log(file);
+            res.redirect(303,'/thankyou')
+       });
+});
 
 // Error catch
 app.get('/error', function (req, res, next) {
