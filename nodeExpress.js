@@ -3,7 +3,7 @@ var express = require('express');
 var app = express();
 // Remove server header for security
 app.disable('x-powered-by');
-// Use Handlebars engine without
+// Use Handlebars engine with main on every render
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
@@ -27,11 +27,12 @@ app.get('/', function (req, res){
 // The default path.  ET phone home
 app.get('/', function(req, res){
     res.render('home');
+    console.log('Home: Default URL');
 });
 // Route to about page
 app.get('/about', function(req, res){
     res.render('about');
-    console.log(req);
+    console.log(req.route);
 });
 
 
@@ -74,34 +75,7 @@ app.post('/file-upload/:year/:month',
        });
 });
 
-// Error catch
-app.get('/error', function (req, res, next) {
-    console.log('Tried to get a page that doesn\'t exist');
-    throw new Error('This page does not exist!');
-});
 
-// Middleware
-app.use(function(req, res, next){
-    console.log("Looking for URL: " + req.url);
-    next();
-});
-// Throws error into the backend not the browser
-app.use(function (err, req, res, next) {
-    console.log('Error: ' + err.message);
-    next();
-});
-// 404 Handler
-app.use(function(req, res){
-   res.type('text/html');
-   res.status(404);
-   res.render('404');
-});
-// 500 Handler
-app.use(function (err, req, res, next) {
-    console.error(err.stack);
-    res.status(500);
-    res.render('500');
-});
 
 // Set the cookie with expiration date
 app.get('/cookie', function (req, res) {
@@ -116,6 +90,92 @@ app.get('/listcookies',  function (req, res){
 app.get('/deletecookies', function (req, res){
     res.clearCookie('userName');
     res.send('userName Cookie Deleted');
+});
+
+// Session variables
+var session = require('express-session');
+var parseurl = require('parseurl');
+
+app.use(session({
+    resave: false, //This will only save changes
+    saveUninitialized: true,
+    secret: credentials.cookieSecret,
+}));
+
+app.use(function(req, res, next){
+    var views = req.session.views;
+
+    if(!views){
+        views = req.session.views = {};
+    }
+
+    var pathname = parseurl(req).pathname;
+
+    views[pathname] = (views[pathname] || 0) + 1;
+
+    next();
+});
+
+app.get('/viewcount', function (req, res, next) {
+   res.send('You viewed this age ' + req.session.views['/viewcount'] + 'times');
+});
+
+// FileSystem module
+var fs = require('fs');
+app.get('/readfile', function(req, res, next){
+    fs.readFile('./public/randomFile.txt', function(err, data){
+        if(err){
+            return console.error(err);
+        }
+        res.send('File Data: ' + data.toString());
+
+
+    });
+});
+
+app.get('/writefile', function(req,res,next){
+    fs.writeFile('./public/randomOut.txt', 'Some Random File Output', function(err){
+        if(err){
+            return console.error(err);
+        }
+    });
+    fs.readFile('./public/randomOut.txt', function (data, err) {
+        if(err){
+            return console.error(err);
+        }
+        res.send('File Data: ' + data.toString());
+    });
+});
+
+// Error catch
+app.get('/error', function (req, res, next) {
+    console.log('Tried to get a page that doesn\'t exist');
+    throw new Error('This page does not exist!');
+});
+
+// Middleware
+app.use(function(req, res, next){
+    console.log("Looking for URL: " + req.url);
+    next();
+});
+
+// Throws error into the backend not the browser
+app.use(function (err, req, res, next) {
+    console.log('Error: ' + err.message);
+    console.log(req.url);
+    next();
+});
+// 404 Handler
+app.use(function(req, res){
+    res.type('text/html');
+    res.status(404);
+    res.render('404');
+});
+// 500 Handler
+app.use(function (err, req, res, next) {
+    console.error(err.stack);
+    res.status(500);
+    res.render('500');
 });
 
 // A listener with console link to the site
